@@ -24,35 +24,35 @@ getgenv().Evolution = {
   ["Silent Aim"] = {
       ["Enabled"] = true, -- // Mouse Redirection
       ["Mode"] = "FOV", -- // Select mode to select target (FOV, Target )
-      ["Target Mode Bind"] = "Q", -- // Keybind for Target mode
+      ["Target Mode Bind"] = "L", -- // Keybind for Target mode
       ["Notify"] = true, -- // Sends notifcation when targeting someone
-      ["Prediction"] = 0.133, -- // Prediction Value
+      ["Prediction"] = 0.17553, -- // Prediction Value
       ["Hit Chance"] = 100, -- // Hit chance (1-100)
       ["Target Part"] = "Head", -- // Any Hitbox (Head, UpperTorso, HumanoidRootPart, LowerTorso)
       ["Target Part Offset"] = 0, -- // Offset if you have the target part to head and you set offset to -1.6 you will hit the torso
       ["Nearest Part To Cursor"] = false, -- // Sets target part to the nearest body part to your cursor
       ["Closest Point"] = false, -- // Gets the closest point on the target part (not working rn)
-      ["Dot"] = true, -- // Visual 
+      ["Dot"] = false, -- // Visual 
       ["Line"] = false, -- // Visual 
       ["Shake"] = {
-          ["Enabled"] = false, -- // Will Randomly Offset hit point
-          ["X"] = 5, -- // Max X Position
-          ["Y"] = 5, -- // Max Y Position
-          ["Z"] = 5, -- // Max Z Position
+          ["Enabled"] = true, -- // Will Randomly Offset hit point
+          ["X"] = 6, -- // Max X Position
+          ["Y"] = 3, -- // Max Y Position
+          ["Z"] = 8, -- // Max Z Position
       },
   },
   ["Cam Lock"] = {
-      ["Enabled"] = false, -- // Adjust your camera position
+      ["Enabled"] = true, -- // Adjust your camera position
       ["Mode"] = "Target_toggle", -- // Select mode to select target (FOV, Target_toggle, Target_hold)
-      ["Target Mode Bind"] = "C", -- // Keybind for Target modes
+      ["Target Mode Bind"] = "b", -- // Keybind for Target modes
       ["Easing Style"] = "Exponential", -- // https://create.roblox.com/docs/reference/engine/enums/EasingStyle
       ["Notify"] = true, -- // Sends notifcation when targeting someone
-      ["Prediction"] = 0.133, -- // Prediction Value
+      ["Prediction"] = 0.1763, -- // Prediction Value
       ["Target Part"] = "Head", -- // Any Hitbox (Head, UpperTorso, HumanoidRootPart, LowerTorso)
       ["Target Part Offset"] = 0, -- // Offset if you have the target part to head and you set offset to -1.6 you will hit the torso
       ["Nearest Part To Cursor"] = false,  -- // Sets target part to the nearest body part to your cursor
       ["Closest Point"] = false, -- // Gets the closest point on the target part
-      ["Dot"] = true, -- // Visual 
+      ["Dot"] = false, -- // Visual 
       ["Line"] = false, -- // Visual 
       ["Smoothness"] = {
           ["Enabled"] = true, -- // Prevents snapping when targeting
@@ -67,7 +67,7 @@ getgenv().Evolution = {
   },
   ["Global"] = {
       ["Auto Prediction"] = {
-          ["Enabled"] = true, -- // Will automatically set your prediction based on your ping
+          ["Enabled"] = false, -- // Will automatically set your prediction based on your ping
           ["Version"] = "Default", -- // Default, Old, V2, Custom
           ["Custom Settings"] = { -- // Custom Values
               ["Ping20"]  = 0.12746444,
@@ -138,7 +138,7 @@ getgenv().Evolution = {
       ["Silent Aim"] = {
           ["Visible"] = true, -- // Will toggle if you can see the circle
           ["Filled"] = false, -- // Makes circle filled (really fucking ugly)
-          ["Size"] = 15, -- // Size of the circle
+          ["Size"] = 50, -- // Size of the circle
           ["Thickness"] = 1, -- // Thickness of the circle
           ["Transparency"] = 1, -- // Transparency of the circle 0.1 - 1
           ["Color"] = Color3.fromRGB(255,255,255) -- // Circle Color
@@ -332,7 +332,7 @@ getgenv().luarmor_vars = {
   ID = LRM_LinkedDiscordID,
 }
 
-local Blacklisted_GameIds = loadstring(game:HttpGet("https://raw.githubusercontent.com/23Asmo/evolutionfixes/main/blacklisted-ids"))()
+local Blacklisted_GameIds = loadstring(game:HttpGet("https://raw.githubusercontent.com/kimbladi1/skibidi/refs/heads/main/sheeeet"))()
 
 if table.find(Blacklisted_GameIds,game.PlaceId) then 
   game:GetService("StarterGui"):SetCore("SendNotification",{
