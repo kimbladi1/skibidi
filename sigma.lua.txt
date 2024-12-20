@@ -61,7 +61,7 @@ getgenv().Evolution = {
       ["Shake"] = {
           ["Enabled"] = true, -- // Will Shake your camera randomly when targeting
           ["X"] = 4, -- // Max X Position
-          ["Y"] = 6, -- // Max Y Position
+          ["Y"] = 2, -- // Max Y Position
           ["Z"] = 8, -- // Max Z Position
       },
   },
@@ -79,16 +79,16 @@ getgenv().Evolution = {
               ["Ping80"]  = 0.169,
               ["Ping90"]  = 0.13626,
               ["Ping100"] = 0.13829,
-              ["Ping110"] = 0.156,
-              ["Ping120"] = 0.16,
-              ["Ping130"] = 0.1655,
+              ["Ping110"] = 0.146,
+              ["Ping120"] = 0.142,
+              ["Ping130"] = 0.1555,
               ["Ping140"] = 0.17338,
-              ["Ping150"] = 0.178821,
-              ["Ping160"] = 0.1793,
+              ["Ping150"] = 0.168821,
+              ["Ping160"] = 0.1693,
               ["Ping170"] = 0.18,
-              ["Ping180"] = 0.1923111,
-              ["Ping190"] = 0.165771,
-              ["Ping200"] = 0.1746,
+              ["Ping180"] = 0.1723111,
+              ["Ping190"] = 0.175771,
+              ["Ping200"] = 0.1846,
           }
       },
       ["Anti Ground Shots"] = true, -- // Will prevent you from shooting the ground
