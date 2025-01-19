@@ -38,13 +38,13 @@ getgenv().Evolution = {
           ["Enabled"] = true, -- // Will Randomly Offset hit point
           ["X"] = 6, -- // Max X Position
           ["Y"] = 3, -- // Max Y Position
-          ["Z"] = 8, -- // Max Z Position
+          ["Z"] = 4, -- // Max Z Position
       },
   },
   ["Cam Lock"] = {
       ["Enabled"] = true, -- // Adjust your camera position
       ["Mode"] = "Target_toggle", -- // Select mode to select target (FOV, Target_toggle, Target_hold)
-      ["Target Mode Bind"] = "b", -- // Keybind for Target modes
+      ["Target Mode Bind"] = "g", -- // Keybind for Target modes
       ["Easing Style"] = "Exponential", -- // https://create.roblox.com/docs/reference/engine/enums/EasingStyle
       ["Notify"] = true, -- // Sends notifcation when targeting someone
       ["Prediction"] = 0.1763, -- // Prediction Value
@@ -55,19 +55,19 @@ getgenv().Evolution = {
       ["Dot"] = false, -- // Visual 
       ["Line"] = false, -- // Visual 
       ["Smoothness"] = {
-          ["Enabled"] = true, -- // Prevents snapping when targeting
+          ["Enabled"] = false, -- // Prevents snapping when targeting
           ["Value"] = 0.058, -- // Smoothness Value
       },
       ["Shake"] = {
-          ["Enabled"] = false, -- // Will Shake your camera randomly when targeting
-          ["X"] = 5, -- // Max X Position
-          ["Y"] = 5, -- // Max Y Position
-          ["Z"] = 5, -- // Max Z Position
+          ["Enabled"] = true, -- // Will Shake your camera randomly when targeting
+          ["X"] = 7, -- // Max X Position
+          ["Y"] = 3, -- // Max Y Position
+          ["Z"] = 2, -- // Max Z Position
       },
   },
   ["Global"] = {
       ["Auto Prediction"] = {
-          ["Enabled"] = false, -- // Will automatically set your prediction based on your ping
+          ["Enabled"] = true, -- // Will automatically set your prediction based on your ping
           ["Version"] = "Default", -- // Default, Old, V2, Custom
           ["Custom Settings"] = { -- // Custom Values
               ["Ping20"]  = 0.12746444,
@@ -91,7 +91,7 @@ getgenv().Evolution = {
               ["Ping200"] = 0.1746,
           }
       },
-      ["Anti Ground Shots"] = false, -- // Will prevent you from shooting the ground
+      ["Anti Ground Shots"] = true, -- // Will prevent you from shooting the ground
       ["Unlock On KO"] = false, -- // Unlocks when target dies
       ["Unlock Outside FOV"] = false, -- // Will unlock when the target leaves your fov
       ["Unlock Behind Wall"] = false, -- // Will unlock when the target goes behind a wall
@@ -906,7 +906,7 @@ GetPrediction = function()
       local PingValue = Value:split(" ")
       local PingNumber = tonumber(PingValue[1])
       if string.lower(Evolution.Global["Auto Prediction"]["Version"]) == "default" then 
-          return tonumber(PingNumber / 225 * 0.1 + 0.1)
+          return tonumber(PingNumber / 225 * 0.121334 + 0.1122)
       elseif string.lower(Evolution.Global["Auto Prediction"]["Version"]) == "old" then 
           if PingNumber < 130 then
               return tonumber(PingNumber / 1000 + 0.037)
