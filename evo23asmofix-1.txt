@@ -6,7 +6,7 @@ getgenv().Evolution = {
           ["Key"] = "", -- // Enter your Evolution Key
       },
       ["Internal"] = {
-          ["Enabled"] = true, -- // Shows internal ui for evolution
+          ["Enabled"] = false, -- // Shows internal ui for evolution
           ["Auto Show"] = true, -- // Will show the ui when you execute
           ["Bind"] = "V", -- // Default keybind to toggle ui
       },
@@ -15,8 +15,8 @@ getgenv().Evolution = {
           ["FPS"] = 999, -- // Maximum FPS
       },
       ["Intro"] = true, -- // Will show a short intro
-      ["Stats"] = true, -- // Shows debug stats 
-      ["Auto Join Discord"] = true, -- // Will Join Discord
+      ["Stats"] = false, -- // Shows debug stats 
+      ["Auto Join Discord"] = false, -- // Will Join Discord
       ["Allow Notifications"] = true, -- // Toggles all notifications
       ["Notifcation Type"] = "xaxa", -- // Akali, Roblox, xaxa
       ["Notifcation Duration"] = 3, -- // How long notifcations will show
@@ -56,10 +56,10 @@ getgenv().Evolution = {
       ["Line"] = false, -- // Visual 
       ["Smoothness"] = {
           ["Enabled"] = false, -- // Prevents snapping when targeting
-          ["Value"] = 0.058, -- // Smoothness Value
+          ["Value"] = 0.2121, -- // Smoothness Value
       },
       ["Shake"] = {
-          ["Enabled"] = true, -- // Will Shake your camera randomly when targeting
+          ["Enabled"] = false, -- // Will Shake your camera randomly when targeting
           ["X"] = 7, -- // Max X Position
           ["Y"] = 3, -- // Max Y Position
           ["Z"] = 2, -- // Max Z Position
@@ -129,16 +129,16 @@ getgenv().Evolution = {
       }
   },
   ["Resolver"] = {
-      ["Enabled"] = false, -- // Resolve Anti Locks and Desyncs
-      ["Method"] = "Delta", -- // Delta, Move Direction, No Prediction, Recalculate
-      ["Keybind Enabled"] = false, -- // Will toggle resolver when you press key
+      ["Enabled"] = true, -- // Resolve Anti Locks and Desyncs
+      ["Method"] = "Move Direction", -- // Delta, Move Direction, No Prediction, Recalculate
+      ["Keybind Enabled"] = true, -- // Will toggle resolver when you press key
       ["Keybind"] = "T", -- // Keybind to toggle resolver
   },
   ["FOV"] = { -- // FOV Circle Settings
       ["Silent Aim"] = {
-          ["Visible"] = true, -- // Will toggle if you can see the circle
+          ["Visible"] = false, -- // Will toggle if you can see the circle
           ["Filled"] = false, -- // Makes circle filled (really fucking ugly)
-          ["Size"] = 50, -- // Size of the circle
+          ["Size"] = 30, -- // Size of the circle
           ["Thickness"] = 1, -- // Thickness of the circle
           ["Transparency"] = 1, -- // Transparency of the circle 0.1 - 1
           ["Color"] = Color3.fromRGB(255,255,255) -- // Circle Color
@@ -906,7 +906,7 @@ GetPrediction = function()
       local PingValue = Value:split(" ")
       local PingNumber = tonumber(PingValue[1])
       if string.lower(Evolution.Global["Auto Prediction"]["Version"]) == "default" then 
-          return tonumber(PingNumber / 225 * 0.121334 + 0.1122)
+          return tonumber(PingNumber / 225 * 0.121334 + 0.102)
       elseif string.lower(Evolution.Global["Auto Prediction"]["Version"]) == "old" then 
           if PingNumber < 130 then
               return tonumber(PingNumber / 1000 + 0.037)
