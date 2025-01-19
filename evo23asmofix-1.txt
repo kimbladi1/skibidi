@@ -55,12 +55,12 @@ getgenv().Evolution = {
       ["Dot"] = false, -- // Visual 
       ["Line"] = false, -- // Visual 
       ["Smoothness"] = {
-          ["Enabled"] = false, -- // Prevents snapping when targeting
+          ["Enabled"] = true, -- // Prevents snapping when targeting
           ["Value"] = 0.2121, -- // Smoothness Value
       },
       ["Shake"] = {
-          ["Enabled"] = false, -- // Will Shake your camera randomly when targeting
-          ["X"] = 7, -- // Max X Position
+          ["Enabled"] = true, -- // Will Shake your camera randomly when targeting
+          ["X"] = 3, -- // Max X Position
           ["Y"] = 3, -- // Max Y Position
           ["Z"] = 2, -- // Max Z Position
       },
@@ -906,7 +906,7 @@ GetPrediction = function()
       local PingValue = Value:split(" ")
       local PingNumber = tonumber(PingValue[1])
       if string.lower(Evolution.Global["Auto Prediction"]["Version"]) == "default" then 
-          return tonumber(PingNumber / 225 * 0.121334 + 0.102)
+          return tonumber(PingNumber / 225 * 0.11134 + 0.102)
       elseif string.lower(Evolution.Global["Auto Prediction"]["Version"]) == "old" then 
           if PingNumber < 130 then
               return tonumber(PingNumber / 1000 + 0.037)
