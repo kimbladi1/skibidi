@@ -1,0 +1,128 @@
+-- Configurations
+_G.Configurations = {
+    ToggleKeyBind = Enum.KeyCode.H,
+    PredictionKeyBind = Enum.KeyCode.J,
+    FOV = 200,
+    Filters = { "Player1" },
+    FilterType = "Whitelist",
+    Gyro = {
+        Power = 15000,
+        Dampening = 0
+    }
+}
+
+-- Services
+local Services = setmetatable({}, {
+    __index = function(self, key)
+        local service = game:GetService(key)
+        if service then
+            self[key] = service
+        end
+        return service
+    end
+})
+
+-- Load external dependencies
+local DrawingAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/iHavoc101/Genesis-Studios/main/Modules/DrawingAPI.lua", true))()
+local UserSettings = UserSettings():GetService("UserGameSettings")
+local Player = Services.Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+-- Drawing configurations
+local Circle = DrawingAPI.new("Circle", {
+    Thickness = 1,
+    Color = Color3.fromRGB(0, 65, 0),
+    NumSides = 64,
+    Radius = _G.Configurations.FOV
+})
+local Triangle = DrawingAPI.new("Triangle", {
+    Thickness = 1,
+    Color = Color3.fromRGB(0, 67, 0)
+})
+
+-- Variables
+local SilentAimEnabled = true
+local PredictionPower = 5
+local TargetPlayer = nil
+local Gyro = Instance.new("BodyGyro")
+Gyro.P = _G.Configurations.Gyro.Power
+Gyro.D = _G.Configurations.Gyro.Dampening
+Gyro.MaxTorque = Vector3.new(0, math.huge, 0)
+
+-- Utility functions
+local function IsValidCharacter(character)
+    return character and character:FindFirstChildWhichIsA("Humanoid") and character.Humanoid.Health > 0
+end
+
+local function FindTarget(FOV)
+    local mouseLocation = Services.UserInputService:GetMouseLocation()
+    local bestTarget, bestPosition, minDistance = nil, nil, FOV or math.huge
+
+    for _, player in ipairs(Services.Players:GetPlayers()) do
+        if (_G.Configurations.FilterType == "Whitelist" and not table.find(_G.Configurations.Filters, player.Name)) or
+           (_G.Configurations.FilterType == "Blacklist" and table.find(_G.Configurations.Filters, player.Name)) then
+            continue
+        end
+
+        if player ~= Player and IsValidCharacter(player.Character) then
+            local screenPos, onScreen = Camera:WorldToViewportPoint(player.Character.PrimaryPart.Position)
+            local distance = (Vector2.new(screenPos.X, screenPos.Y) - mouseLocation).Magnitude
+            if onScreen and distance < minDistance and #Camera:GetPartsObscuringTarget({ player.Character.PrimaryPart.Position }, { Player.Character, player.Character }) <= 1 then
+                bestTarget = player
+                bestPosition = screenPos
+                minDistance = distance
+            end
+        end
+    end
+
+    return bestTarget, bestPosition, minDistance
+end
+
+-- Main loop
+Services.RunService.Heartbeat:Connect(function()
+    local target, screenPos = FindTarget(_G.Configurations.FOV)
+    TargetPlayer = target
+
+    if target then
+        local velocity = target.Character.PrimaryPart:GetVelocityAtPosition(target.Character.PrimaryPart.Position)
+        local prediction = (velocity * Vector3.new(1, 0, 1)).Unit * PredictionPower
+
+        if SilentAimEnabled and prediction.Magnitude >= 0 then
+            Gyro.Parent = Player.Character.PrimaryPart
+            Gyro.CFrame = CFrame.new(Player.Character.PrimaryPart.Position, target.Character.PrimaryPart.Position + prediction)
+        else
+            Gyro.Parent = nil
+        end
+
+        Triangle.PointA = Vector2.new(screenPos.X - 25, screenPos.Y + 25)
+        Triangle.PointB = Vector2.new(screenPos.X + 25, screenPos.Y + 25)
+        Triangle.PointC = Vector2.new(screenPos.X, screenPos.Y - 25)
+    else
+        Gyro.Parent = nil
+    end
+
+    Circle.Position = Services.UserInputService:GetMouseLocation()
+end)
+
+-- Keybinds
+Services.ContextActionService:BindAction("ToggleSilent", function(_, state)
+    if state == Enum.UserInputState.End then return end
+    SilentAimEnabled = not SilentAimEnabled
+    Services.StarterGui:SetCore("SendNotification", {
+        Title = "Silent Aim",
+        Text = "Enabled: " .. tostring(SilentAimEnabled),
+        Icon = SilentAimEnabled and "rbxassetid://6031068430" or "rbxassetid://6031068429",
+        Duration = 5
+    })
+end, false, _G.Configurations.ToggleKeyBind)
+
+Services.ContextActionService:BindAction("TogglePrediction", function(_, state)
+    if state == Enum.UserInputState.End then return end
+    PredictionPower = PredictionPower == 5 and 20 or 5
+    Services.StarterGui:SetCore("SendNotification", {
+        Title = "Prediction",
+        Text = "Enabled: " .. tostring(PredictionPower == 20),
+        Icon = "rbxassetid://6034287516",
+        Duration = 5
+    })
+end, false, _G.Configurations.PredictionKeyBind)
