@@ -56,7 +56,7 @@ getgenv().Evolution = {
       ["Line"] = false, -- // Visual 
       ["Smoothness"] = {
           ["Enabled"] = true, -- // Prevents snapping when targeting
-          ["Value"] = 0.0421, -- // Smoothness Value
+          ["Value"] = 0.0821, -- // Smoothness Value
       },
       ["Shake"] = {
           ["Enabled"] = false, -- // Will Shake your camera randomly when targeting
